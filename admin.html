@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>VUT Survey Admin</title><link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script></head>
+<body><header><div class="brand">VUT <span>SURVEY ADMIN</span></div><button id="logout" class="ghost hidden">Log out</button></header>
+<main>
+<section id="login" class="card narrow"><p class="eyebrow">PRIVATE</p><h1>Admin Login</h1>
+<input id="email" class="input" type="email" placeholder="Admin email"><input id="password" class="input" type="password" placeholder="Password">
+<button id="loginBtn" class="primary">Sign in</button><p id="loginMsg" class="small"></p></section>
+<section id="dash" class="hidden"><div class="dashhead"><div><p class="eyebrow">SURVEY RESULTS</p><h1>Responses</h1></div><button id="csv" class="ghost">Export CSV</button></div>
+<div class="stats"><div><span>Responses</span><strong id="total">0</strong></div><div><span>Average Wi-Fi rating</span><strong id="wifi">0</strong></div><div><span>Lab access problems</span><strong id="lab">0%</strong></div></div>
+<div class="card"><input id="search" class="input" placeholder="Search responses">
+<div class="tablewrap"><table><thead><tr><th>Name</th><th>Lab use</th><th>Open PC?</th><th>Wi-Fi</th><th>Dropouts?</th><th>Weak locations</th><th>Enough labs?</th><th>Software?</th><th>Improvement</th><th>Date</th></tr></thead><tbody id="body"></tbody></table></div></div>
+</section></main><script src="admin.js"></script></body></html>

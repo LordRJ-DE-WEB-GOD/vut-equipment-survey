@@ -1,0 +1,10 @@
+let rows=[];
+const $=id=>document.getElementById(id);
+async function init(){const {data:{session}}=await supabaseClient.auth.getSession();session?show():$("login").classList.remove("hidden")}
+async function login(){const {error}=await supabaseClient.auth.signInWithPassword({email:$("email").value,password:$("password").value});if(error){$("loginMsg").textContent=error.message}else show()}
+async function show(){$("login").classList.add("hidden");$("dash").classList.remove("hidden");$("logout").classList.remove("hidden");await load()}
+async function load(){const {data,error}=await supabaseClient.from("survey_responses").select("*").order("created_at",{ascending:false});if(error){$("body").innerHTML=`<tr><td colspan="10">${error.message}</td></tr>`;return}rows=data||[];render(rows)}
+function render(r){$("total").textContent=r.length;$("wifi").textContent=r.length?(r.reduce((a,x)=>a+Number(x.q3||0),0)/r.length).toFixed(1):"0";$("lab").textContent=r.length?Math.round(r.filter(x=>x.q2==="Yes").length/r.length*100)+"%":"0%";$("body").innerHTML=r.map(x=>`<tr><td>${e(x.player_name)}</td><td>${e(x.q1)}</td><td>${e(x.q2)}</td><td>${e(x.q3)}</td><td>${e(x.q4)}</td><td>${e(x.q5)}</td><td>${e(x.q6)}</td><td>${e(x.q7)}</td><td>${e(x.q8)}</td><td>${new Date(x.created_at).toLocaleString()}</td></tr>`).join("")}
+function e(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]) )}
+$("loginBtn").onclick=login;$("logout").onclick=async()=>{await supabaseClient.auth.signOut();location.reload()};$("search").oninput=x=>{let q=x.target.value.toLowerCase();render(rows.filter(r=>JSON.stringify(r).toLowerCase().includes(q)))};
+$("csv").onclick=()=>{let h=["Name","Q1","Q2","Q3 WiFi","Q4","Q5","Q6","Q7","Q8","Submitted"];let c=[h,...rows.map(r=>[r.player_name,r.q1,r.q2,r.q3,r.q4,r.q5,r.q6,r.q7,r.q8,r.created_at])].map(a=>a.map(v=>`"${String(v??"").replaceAll('"','""')}"`).join(",")).join("\n");let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([c],{type:"text/csv"}));a.download="vut-survey-responses.csv";a.click()};init();

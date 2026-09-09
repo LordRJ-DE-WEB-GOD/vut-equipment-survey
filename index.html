@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VUT Equipment Survey</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+</head>
+<body>
+<header><div class="brand">VUT <span>EQUIPMENT SURVEY</span></div></header>
+<main>
+<section id="survey" class="card">
+<p class="eyebrow">VUT MAIN CAMPUS</p>
+<h1>Equipment Availability Survey</h1>
+<p class="muted">Please answer the following questions about computer labs, Wi-Fi and equipment access.</p>
+
+<label>Your name <span>(optional)</span></label>
+<input id="name" class="input" maxlength="60" placeholder="Anonymous">
+
+<div class="question"><b>1. How often do you use the campus computer labs?</b>
+<label><input type="radio" name="q1" value="Daily"> Daily</label>
+<label><input type="radio" name="q1" value="Few times a week"> Few times a week</label>
+<label><input type="radio" name="q1" value="Rarely"> Rarely</label>
+<label><input type="radio" name="q1" value="Never"> Never</label></div>
+
+<div class="question"><b>2. Have you ever been unable to find an open computer during peak hours?</b>
+<label><input type="radio" name="q2" value="Yes"> Yes</label><label><input type="radio" name="q2" value="No"> No</label></div>
+
+<div class="question"><b>3. How would you rate the Wi-Fi signal strength in your usual study areas?</b>
+<select id="q3" class="input"><option value="">Select 1–5</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+
+<div class="question"><b>4. Have you experienced Wi-Fi dropouts or slow connection on campus?</b>
+<label><input type="radio" name="q4" value="Yes"> Yes</label><label><input type="radio" name="q4" value="No"> No</label></div>
+
+<div class="question"><b>5. Which locations have the weakest Wi-Fi, in your experience?</b>
+<textarea id="q5" class="input" maxlength="500" placeholder="Your answer"></textarea></div>
+
+<div class="question"><b>6. Is the number of computer labs sufficient for student demand?</b>
+<label><input type="radio" name="q6" value="Yes"> Yes</label><label><input type="radio" name="q6" value="No"> No</label><label><input type="radio" name="q6" value="Unsure"> Unsure</label></div>
+
+<div class="question"><b>7. Do lab computers have the software you need for your coursework?</b>
+<label><input type="radio" name="q7" value="Yes"> Yes</label><label><input type="radio" name="q7" value="No"> No</label></div>
+
+<div class="question"><b>8. What one change would most improve equipment access for you?</b>
+<textarea id="q8" class="input" maxlength="1000" placeholder="Your answer"></textarea></div>
+
+<button id="submitBtn" class="primary">Submit Survey</button>
+<p id="msg" class="small"></p>
+</section>
+
+<section id="thanks" class="card hidden">
+<p class="eyebrow">SUBMITTED</p><h1>Thank you!</h1>
+<p class="muted">Your survey response has been recorded.</p>
+<button class="primary" onclick="location.reload()">Submit another response</button>
+</section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
